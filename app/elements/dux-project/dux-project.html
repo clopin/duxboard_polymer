@@ -1,0 +1,33 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-item/paper-item.html">
+
+<dom-module id="dux-project">
+  <style>
+    :host {
+
+    }  
+  </style>
+  <template>
+    <paper-item><span>{{name}}</span></paper-item>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: 'dux-project',
+    properties: {
+      name: {
+        type: String,
+        notify: true
+      },
+      client: {
+        type: String,
+        notify: true
+      },
+      timestamp: {
+        type: Date,
+        notify: true
+      }
+    }
+  });
+</script>
