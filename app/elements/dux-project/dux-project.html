@@ -8,7 +8,7 @@
     }  
   </style>
   <template>
-    <paper-item><span>{{name}}</span></paper-item>
+    <paper-item on-click="detailclick"><span>{{name}}</span><span>{{key}}</span></paper-item>
   </template>
 </dom-module>
 
@@ -27,7 +27,14 @@
       timestamp: {
         type: Date,
         notify: true
+      },
+      key: {
+        type: String
       }
+    },
+    detailclick: function() {
+      console.log('keytrigger', this.key);
+      this.fire('detailselect', {'msg':this.key});
     }
   });
 </script>

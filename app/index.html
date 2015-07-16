@@ -113,9 +113,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
                 <h2 class="paper-font-display2">Projecten:</h2>
                 <dux-projectlijst></dux-projectlijst>
-
+                <a href="/pentry"><paper-fab icon="add"></paper-fab></a>
               </paper-material>
 
+            </section>
+
+            <section data-route="pentry">
+              <paper-material elevation="1">
+                <dux-projectentry on-saved="goHome"></dux-projectentry>
+              </paper-material>
             </section>
 
             <section data-route="users">

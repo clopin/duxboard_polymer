@@ -1,11 +1,11 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
-<link rel="import" href="../dux-project/dux-project.html">
 <link rel="import" href="../../bower_components/paper-fab/paper-fab.html">
 <link rel="import" href="../../bower_components/paper-dialog/paper-dialog.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../../bower_components/firebase-element/firebase.html">
 <link rel="import" href="../../bower_components/firebase-element/firebase-collection.html">
+<link rel="import" href="../dux-project/dux-project.html">
 
 <dom-module id="dux-projectlijst">
   <style>
@@ -15,21 +15,11 @@
   </style>
   <template>
   	<firebase-collection id="fbProjects" order-by-child="name" location="https://duxboard.firebaseio.com/projects" data="{{projects}}"></firebase-collection>
+  	<paper-menu multi>
   	<template is="dom-repeat" items="{{projects}}">
-  		<dux-project name="{{item.name}}"></dux-project>
+  		<dux-project key="{{item.__firebaseKey__}}" name="{{item.name}}" on-detailselect="onselect"></dux-project>
   	</template>
-  	<paper-fab icon="add" on-click="showDialog"></paper-fab>
-  	<paper-dialog id="newDialog" class="fit">
-	  <h2>Voeg project toe</h2>
-	  <form>
-		  <paper-input id="name" label="Naam"></paper-input>
-		  <paper-input id="client" label="Klant"></paper-input>
-	  </form>
-	  <div class="buttons">
-	    <paper-button dialog-dismiss>Cancel</paper-button>
-	    <paper-button on-click="submitProject">Voeg toe</paper-button>
-	  </div>
-	</paper-dialog>
+  	</paper-menu>
   </template>
 </dom-module>
 
@@ -37,18 +27,8 @@
   Polymer({
     is: 'dux-projectlijst', 
 
-    showDialog: function() {
-    	this.$.newDialog.toggle();
-    }, 
-    submitProject: function() {
-    	this.$.fbProjects.add({
-    		name: this.$.name.value,
-    		client: this.$.client.value,
-    		timestamp: new Date().getTime()
-    	});
-		this.$.name.value = '';
-  		this.$.client.value = '';
-    	this.$.newDialog.toggle();
+    onselect: function(e) {
+    	console.log('final select', e.detail.msg);
     }
   });
 </script>
