@@ -17,20 +17,44 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     }
   </style>
   <template>
-    <div>Hello from <span>{{foo}}</span></div>
+    <h2>Voeg user toe</h2>
+    <form>
+      <paper-input id="name" label="Naam"></paper-input>
+      <paper-input id="firm" label="Firma"></paper-input>
+      <paper-input id="regime" label="Regime"></paper-input>
+      <paper-input id="role" label="Functie"></paper-input>
+    </form>
+    <div class="buttons">
+      <paper-button on-click="cancelUser" >Cancel</paper-button>
+      <paper-button on-click="submitUser" raised>Voeg toe</paper-button>
+    </div>
   </template>
 </dom-module>
 <script>
 (function() {
   Polymer({
     is: 'dux-userentry',
+    cancelUser: function() {
+      this.fire('goto', {'msg': 'users'});
+    },
+    submitUser: function() {
+      this.fbUsers= new Firebase("https://duxboard.firebaseio.com/users");
+      var that = this;
+      this.fbUsers.push({
+        name: this.$.name.value,
+        firm: this.$.firm.value,
+        regime: this.$.regime.value,
+        role: this.$.role.value,
+        timestamp: new Date().getTime()
+      },
+      function(){
+        that.fire('goto', {'msg': 'users'});
+      });
 
-    properties: {
-      foo: {
-        type: String,
-        value: 'bar',
-        notify: true
-      }
+      this.$.name.value = '';
+      this.$.firm.value = '';
+      this.$.regime.value = '';
+      this.$.role.value = '';
     }
   });
 })();

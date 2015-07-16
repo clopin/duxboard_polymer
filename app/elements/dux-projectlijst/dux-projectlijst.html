@@ -15,20 +15,16 @@
   </style>
   <template>
   	<firebase-collection id="fbProjects" order-by-child="name" location="https://duxboard.firebaseio.com/projects" data="{{projects}}"></firebase-collection>
-  	<paper-menu multi>
-  	<template is="dom-repeat" items="{{projects}}">
-  		<dux-project key="{{item.__firebaseKey__}}" name="{{item.name}}" on-detailselect="onselect"></dux-project>
-  	</template>
+  	<paper-menu>
+    	<template is="dom-repeat" items="{{projects}}">
+    		<dux-project key="{{item.__firebaseKey__}}" name="{{item.name}}" on-detailselect="onselect"></dux-project>
+    	</template>
   	</paper-menu>
   </template>
 </dom-module>
 
 <script>
   Polymer({
-    is: 'dux-projectlijst', 
-
-    onselect: function(e) {
-    	console.log('final select', e.detail.msg);
-    }
+    is: 'dux-projectlijst'
   });
 </script>

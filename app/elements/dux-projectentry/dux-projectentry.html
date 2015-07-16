@@ -24,7 +24,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </form>
     <div class="buttons">
       <paper-button on-click="cancelProject">Cancel</paper-button>
-      <paper-button on-click="submitProject">Voeg toe</paper-button>
+      <paper-button on-click="submitProject" raised>Voeg toe</paper-button>
     </div>
   </template>
 </dom-module>
@@ -32,14 +32,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 (function() {
   Polymer({
     is: 'dux-projectentry',
-
-    properties: {
-      foo: {
-        type: String,
-        value: 'bar',
-        notify: true
-      }
-    }, 
     cancelProject: function() {
       this.fire('goto', {'msg': 'projects'});
     },

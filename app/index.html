@@ -58,8 +58,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <body unresolved class="fullbleed layout vertical">
   <span id="browser-sync-binding"></span>
   <template is="dom-bind" id="app">
-
-    <paper-drawer-panel id="paperDrawerPanel">
+         <paper-drawer-panel id="paperDrawerPanel">
       <div drawer>
 
         <!-- Drawer Toolbar -->
@@ -123,8 +122,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             <section data-route="projects">
               <paper-material elevation="1">
-
-                <h2 class="paper-font-display2">Projecten:</h2>
+                <h2 class="paper-font-display2">Projecten</h2>
                 <dux-projectlijst></dux-projectlijst>
                 <a href="/newproject"><paper-fab icon="add"></paper-fab></a>
               </paper-material>
@@ -140,8 +138,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <section data-route="users">
               <paper-material elevation="1">
                 <h2 class="paper-font-display2">Users</h2>
-                <p>This is the users section</p>
-                <a href="/users/Rob">Rob</a>
+                <dux-userlijst></dux-userlijst>
+                <a href="/newuser"><paper-fab icon="add"></paper-fab></a>
+              </paper-material>
+            </section>
+
+            <section data-route="newuser">
+              <paper-material elevation="1">
+                <dux-userentry on-goto="goto"></dux-userentry>
               </paper-material>
             </section>
 
@@ -151,13 +155,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 User:<span>{{params.name}}</span>
                 </h2>
                 <div>This is <span>{{params.name}}</span>'s section</div>
-              </paper-material>
-            </section>
-
-            <section data-route="contact">
-              <paper-material elevation="1">
-                <h2 class="paper-font-display2">Contact</h2>
-                <p>This is the contact section</p>
               </paper-material>
             </section>
 
@@ -179,7 +176,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                          precache-file="precache.json">
       </platinum-sw-cache>
     </platinum-sw-register>
-
   </template>
 
   <!-- build:js scripts/app.js -->

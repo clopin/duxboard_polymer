@@ -37,11 +37,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       drawerPanel.closeDrawer();
     }
   };
-
-  app.goto = function(e) {
-    console.log('ga naar route', e.detail.msg);
-    app.route = e.detail.msg;
-    window.location = '/#!/'+e.detail.msg;
-  }
+  
+    app.goto = function(e) {
+      app.route = e.detail.msg;
+      //window.location = '/#!/'+e.detail.msg;
+    }
 
 })(document);
