@@ -74,6 +74,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 <span>Home</span>
               </a>
 
+              <a data-route="projects" href="/projects">
+                <iron-icon icon="info"></iron-icon>
+                <span>Projecten</span>
+              </a>
+
               <a data-route="users" href="/users">
                 <iron-icon icon="info"></iron-icon>
                 <span>Users</span>
@@ -111,16 +116,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <section data-route="home">
               <paper-material elevation="1">
 
-                <h2 class="paper-font-display2">Projecten:</h2>
-                <dux-projectlijst></dux-projectlijst>
-                <a href="/pentry"><paper-fab icon="add"></paper-fab></a>
+                <h2 class="paper-font-display2">Zie menu hiernaast</h2>
               </paper-material>
 
             </section>
 
-            <section data-route="pentry">
+            <section data-route="projects">
               <paper-material elevation="1">
-                <dux-projectentry on-saved="goHome"></dux-projectentry>
+
+                <h2 class="paper-font-display2">Projecten:</h2>
+                <dux-projectlijst></dux-projectlijst>
+                <a href="/newproject"><paper-fab icon="add"></paper-fab></a>
+              </paper-material>
+
+            </section>
+
+            <section data-route="newproject">
+              <paper-material elevation="1">
+                <dux-projectentry on-goto="goto"></dux-projectentry>
               </paper-material>
             </section>
 

@@ -38,9 +38,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     }
   };
 
-  app.goHome = function() {
-    app.route = 'home';
-    window.location = '/#!';
+  app.goto = function(e) {
+    console.log('ga naar route', e.detail.msg);
+    app.route = e.detail.msg;
+    window.location = '/#!/'+e.detail.msg;
   }
 
 })(document);

@@ -41,7 +41,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
     }, 
     cancelProject: function() {
-      this.fire('saved');
+      this.fire('goto', {'msg': 'projects'});
     },
     submitProject: function() {
       this.fbProjects= new Firebase("https://duxboard.firebaseio.com/projects");
@@ -52,9 +52,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         timestamp: new Date().getTime()
       },
       function(){
-        console.log("saved");
-        that.fire('saved');
+        that.fire('goto', {'msg': 'projects'});
       });
+
       this.$.name.value = '';
       this.$.client.value = '';
     }
