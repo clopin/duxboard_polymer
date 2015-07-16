@@ -41,7 +41,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       this.fbProjects.push({
         name: this.$.name.value,
         client: this.$.client.value,
-        timestamp: new Date().getTime()
+        timestamp: Firebase.ServerValue.TIMESTAMP
       },
       function(){
         that.fire('goto', {'msg': 'projects'});

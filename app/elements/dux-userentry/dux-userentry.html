@@ -45,7 +45,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         firm: this.$.firm.value,
         regime: this.$.regime.value,
         role: this.$.role.value,
-        timestamp: new Date().getTime()
+        timestamp: Firebase.ServerValue.TIMESTAMP
       },
       function(){
         that.fire('goto', {'msg': 'users'});
