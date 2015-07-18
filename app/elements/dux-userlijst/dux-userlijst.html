@@ -15,12 +15,12 @@
   </style>
   <template>
     <firebase-collection id="fbUsers" order-by-child="name" location="https://duxboard.firebaseio.com/users" data="{{users}}"></firebase-collection>
-  </template>
       <paper-menu>
       <template is="dom-repeat" items="{{users}}">
         <dux-project key="{{item.__firebaseKey__}}" name="{{item.name}}" on-detailselect="onselect"></dux-project>
       </template>
     </paper-menu>
+    </template>
 </dom-module>
 <script>
   (function() {
