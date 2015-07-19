@@ -17,10 +17,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     }
   </style>
   <template>
+  <firebase-collection id="fbClients" order-by-child="name" location="https://duxboard.firebaseio.com/clients" data="{{clients}}"></firebase-collection>
     <h2>Voeg project toe</h2>
     <form>
       <paper-input id="name" label="Naam"></paper-input>
-      <paper-input id="client" label="Klant"></paper-input>
+      Klant: <paper-radio-group id="client">
+        <template is="dom-repeat" items="{{clients}}">
+          <paper-radio-button name="{{item.__firebaseKey__}}">{{item.name}}</paper-radio-button>
+        </template>
+      </paper-radio-group>
+      <a href="/newclient"><iron-icon icon="icons:add-circle"></iron-icon></a>
+      <!-- <paper-input id="client" label="Klant"></paper-input> -->
     </form>
     <div class="buttons">
       <paper-button on-click="cancelProject">Cancel</paper-button>
@@ -36,19 +43,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       this.fire('goto', {'msg': 'projects'});
     },
     submitProject: function() {
+      // console.log("Client value is " + this.$.fbClients.getByKey(this.$.client.selected).group);
       this.fbProjects= new Firebase("https://duxboard.firebaseio.com/projects");
       var that = this;
       this.fbProjects.push({
         name: this.$.name.value,
-        client: this.$.client.value,
-        timestamp: Firebase.ServerValue.TIMESTAMP
+        clientkey: this.$.client.selected,
+        timestamp: Firebase.ServerValue.TIMESTAMP,
+        clientname: this.$.fbClients.getByKey(this.$.client.selected).name, 
+        clientgroup: this.$.fbClients.getByKey(this.$.client.selected).group,
       },
       function(){
         that.fire('goto', {'msg': 'projects'});
       });
 
       this.$.name.value = '';
-      this.$.client.value = '';
+      this.$.client.selected = '';
     }
   });
 })();

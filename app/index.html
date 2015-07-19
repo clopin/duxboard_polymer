@@ -74,13 +74,29 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               </a>
 
               <a data-route="projects" href="/projects">
-                <iron-icon icon="info"></iron-icon>
+                <iron-icon icon="icons:assignment-turned-in"></iron-icon>
                 <span>Projecten</span>
               </a>
 
               <a data-route="users" href="/users">
-                <iron-icon icon="info"></iron-icon>
+                <iron-icon icon="icons:perm-identity"></iron-icon>
                 <span>Users</span>
+              </a>
+
+              <a data-route="inkomsten" href="/inkomsten">
+                <iron-icon icon="icons:file-download"></iron-icon>
+                <span>Inkomsten</span>
+              </a>
+
+              <a data-route="uitgaven" href="/uitgaven">
+                <iron-icon icon="icons:file-upload"></iron-icon>
+                <span>Uitgaven</span>
+              </a>
+
+
+              <a data-route="timesheets" href="/timesheets">
+                <iron-icon icon="icons:alarm-add"></iron-icon>
+                <span>Timesheets</span>
               </a>
 
               <a data-route="contact" href="/contact">
@@ -146,6 +162,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <section data-route="newuser">
               <paper-material elevation="1">
                 <dux-userentry on-goto="goto"></dux-userentry>
+              </paper-material>
+            </section>
+
+            <section data-route="newclient">
+              <paper-material elevation="1">
+                <dux-klantenentry on-goto="goto"></dux-klantenentry>
               </paper-material>
             </section>
 
