@@ -17,20 +17,56 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     }
   </style>
   <template>
-    <div>Hello from <span>{{foo}}</span></div>
+    <firebase-collection id="fbProjects" order-by-child="name" location="https://duxboard.firebaseio.com/projects" data="{{projects}}"></firebase-collection>
+    <firebase-collection id="fbClients" order-by-child="name" location="https://duxboard.firebaseio.com/clients" data="{{clients}}"></firebase-collection>
+    <firebase-collection id="fbUsers" order-by-child="name" location="https://duxboard.firebaseio.com/users" data="{{users}}"></firebase-collection>
+    <h2>Voeg tijdsregistratie toe</h2>
+    <form>
+      <paper-input id="weeknr" label="Week"></paper-input>
+      <paper-input id="year" label="Jaar"></paper-input>
+      <paper-input id="hours" label="Uren"></paper-input>
+      Project: <paper-radio-group id="project">
+        <template is="dom-repeat" items="{{projects}}">
+          <paper-radio-button name="{{item.__firebaseKey__}}">{{item.name}}</paper-radio-button>
+        </template>
+      </paper-radio-group>
+      <a href="/newproject"><iron-icon icon="icons:add-circle"></iron-icon></a>
+      User: <paper-radio-group id="user">
+        <template is="dom-repeat" items="{{users}}">
+          <paper-radio-button name="{{item.__firebaseKey__}}">{{item.name}}</paper-radio-button>
+        </template>
+      </paper-radio-group>
+      <a href="/newuser"><iron-icon icon="icons:add-circle"></iron-icon></a>
+    </form>
+    <div class="buttons">
+      <paper-button on-click="cancelTimeEntry">Cancel</paper-button>
+      <paper-button on-click="submitTimeEntry" raised>Voeg toe</paper-button>
+    </div>
   </template>
 </dom-module>
 <script>
 (function() {
   Polymer({
     is: 'dux-inkomstenentry',
-
-    properties: {
-      foo: {
-        type: String,
-        value: 'bar',
-        notify: true
-      }
+    cancelTimeEntry: function() {
+      this.fire('goto', {'msg': 'timeentries'});
+    },
+    submitTimeEntry: function() {
+      this.fbTimeentries= new Firebase("https://duxboard.firebaseio.com/timeentries");
+      var that = this;
+      this.fbTimeentries.push({
+        week: that.$.weeknr.value,
+        year: that.$.year.value,
+        hours: that.$.hours.value,
+        timestamp: Firebase.ServerValue.TIMESTAMP,
+        clientkey: that.$.client.selected,
+        clientname: that.$.fbClients.getByKey(that.$.client.selected).name, 
+        clientgroup: that.$.fbClients.getByKey(that.$.client.selected).group,
+        userkey: that.$.user.selected,
+        username: that.$.fbUsers.getByKey(that.$.user.selected).name, 
+        projectkey: that.$.project.selected,
+        projectname: that.$.fbProjects.getByKey(that.$.project.selected).name
+      })
     }
   });
 })();

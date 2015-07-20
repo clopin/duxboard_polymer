@@ -94,7 +94,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               </a>
 
 
-              <a data-route="timesheets" href="/timesheets">
+              <a data-route="timesheets" href="/timeentries">
                 <iron-icon icon="icons:alarm-add"></iron-icon>
                 <span>Timesheets</span>
               </a>
@@ -148,6 +148,56 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <section data-route="newproject">
               <paper-material elevation="1">
                 <dux-projectentry on-goto="goto"></dux-projectentry>
+              </paper-material>
+            </section>
+
+            <section data-route="users">
+              <paper-material elevation="1">
+                <h2 class="paper-font-display2">Users</h2>
+                <dux-userlijst></dux-userlijst>
+                <a href="/newuser"><paper-fab icon="add"></paper-fab></a>
+              </paper-material>
+            </section>
+
+            <section data-route="inkomsten">
+              <paper-material elevation="1">
+                <h2 class="paper-font-display2">Inkomsten</h2>
+                <dux-inkomstenlijst></dux-inkomstenlijst>
+                <a href="/newinkomstenlijn"><paper-fab icon="add"></paper-fab></a>
+              </paper-material>
+            </section>
+
+            <section data-route="timeentries">
+              <paper-material elevation="1">
+                <h2 class="paper-font-display2">Time</h2>
+                <dux-inkomstenlijst></dux-inkomstenlijst>
+                <a href="/newtimeentry"><paper-fab icon="add"></paper-fab></a>
+              </paper-material>
+            </section>
+
+            <section data-route="newtimeentry">
+              <paper-material elevation="1">
+                <dux-timeentry on-goto="goto"></dux-timeentry>
+              </paper-material>
+            </section>
+
+            <section data-route="newinkomstenlijn">
+              <paper-material elevation="1">
+                <dux-inkomstenentry on-goto="goto"></dux-inkomstenentry>
+              </paper-material>
+            </section>
+
+            <section data-route="uitgaven">
+              <paper-material elevation="1">
+                <h2 class="paper-font-display2">Users</h2>
+                <dux-uitgavenlijst></dux-uitgavenlijst>
+                <a href="/newuitgaven"><paper-fab icon="add"></paper-fab></a>
+              </paper-material>
+            </section>
+
+            <section data-route="newuitgaven">
+              <paper-material elevation="1">
+                <dux-uitgavenentry on-goto="goto"></dux-uitgavenentry>
               </paper-material>
             </section>
 
