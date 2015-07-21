@@ -10,25 +10,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
-<dom-module id="dux-timelijst">
+<dom-module id="dux-time">
   <style>
     :host {
       display: block;
     }
   </style>
   <template>
-    <firebase-collection id="fbTimentries" order-by-child="weeknr" location="https://duxboard.firebaseio.com/timeentries" data="{{timeentries}}"></firebase-collection>
-    <paper-menu>
-      <template is="dom-repeat" items="{{timeentries}}">
-        <dux-time key="{{item.__firebaseKey__}}" weeknr="{{item.weeknr}}" on-detailselect="onselect"></dux-time>
-      </template>
-    </paper-menu>
+    <paper-item on-click="detailclick"><span>{{weeknr}}</span></paper-item>
   </template>
 </dom-module>
 <script>
 (function() {
   Polymer({
-    is: 'dux-timelijst',
+    is: 'dux-time',
 
     properties: {
       foo: {

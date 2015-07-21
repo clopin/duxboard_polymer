@@ -17,30 +17,33 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     }
   </style>
   <template>
-    <firebase-collection id="fbProjects" order-by-child="name" location="https://duxboard.firebaseio.com/projects" data="{{projects}}"></firebase-collection>
     <firebase-collection id="fbClients" order-by-child="name" location="https://duxboard.firebaseio.com/clients" data="{{clients}}"></firebase-collection>
-    <firebase-collection id="fbUsers" order-by-child="name" location="https://duxboard.firebaseio.com/users" data="{{users}}"></firebase-collection>
-    <h2>Voeg tijdsregistratie toe</h2>
+    <h2>Voeg inkomsten toe</h2>
     <form>
-      <paper-input id="weeknr" label="Week"></paper-input>
-      <paper-input id="year" label="Jaar"></paper-input>
-      <paper-input id="hours" label="Uren"></paper-input>
-      Project: <paper-radio-group id="project">
-        <template is="dom-repeat" items="{{projects}}">
+      <paper-input id="toteller" label="Teller">Q1500005</paper-input>
+      <paper-input id="fromteller" label="Bron"></paper-input>
+      <paper-input id="reference" label="Referentie"></paper-input>
+      <paper-input id="days" label="Dagen"></paper-input>
+      <paper-input id="amount" label="Bedrag"></paper-input>
+      Flow:<paper-radio-group id="flow">
+        <paper-radio-button name="in">In</paper-radio-button>
+        <paper-radio-button name="uit">Uit</paper-radio-button>
+      </paper-radio-group>
+      Klant: <paper-radio-group id="client">
+        <template is="dom-repeat" items="{{clients}}">
           <paper-radio-button name="{{item.__firebaseKey__}}">{{item.name}}</paper-radio-button>
         </template>
       </paper-radio-group>
-      <a href="/newproject"><iron-icon icon="icons:add-circle"></iron-icon></a>
-      User: <paper-radio-group id="user">
-        <template is="dom-repeat" items="{{users}}">
-          <paper-radio-button name="{{item.__firebaseKey__}}">{{item.name}}</paper-radio-button>
-        </template>
+      <a href="/newclient"><iron-icon icon="icons:add-circle"></iron-icon></a>
+      <paper-input id="comment" label="Comment"></paper-input>
+      Verified:<paper-radio-group id="verified">
+        <paper-radio-button name="OK">OK</paper-radio-button>
+        <paper-radio-button name="NOK">NOK</paper-radio-button>
       </paper-radio-group>
-      <a href="/newuser"><iron-icon icon="icons:add-circle"></iron-icon></a>
     </form>
     <div class="buttons">
-      <paper-button on-click="cancelTimeEntry">Cancel</paper-button>
-      <paper-button on-click="submitTimeEntry" raised>Voeg toe</paper-button>
+      <paper-button on-click="cancelOrder">Cancel</paper-button>
+      <paper-button on-click="submitOrder" raised>Voeg toe</paper-button>
     </div>
   </template>
 </dom-module>
@@ -48,24 +51,27 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 (function() {
   Polymer({
     is: 'dux-inkomstenentry',
-    cancelTimeEntry: function() {
-      this.fire('goto', {'msg': 'timeentries'});
+    cancelOrder: function() {
+      this.fire('goto', {'msg': 'inkomsten'});
     },
-    submitTimeEntry: function() {
-      this.fbTimeentries= new Firebase("https://duxboard.firebaseio.com/timeentries");
+    submitOrder: function() {
+      this.fbOrders= new Firebase("https://duxboard.firebaseio.com/orders");
       var that = this;
-      this.fbTimeentries.push({
-        week: that.$.weeknr.value,
-        year: that.$.year.value,
-        hours: that.$.hours.value,
+      this.fbOrders.push({
+        toteller: that.$.toteller.value,
+        fromteller: that.$.fromteller.value,
+        reference: that.$.reference.value,
         timestamp: Firebase.ServerValue.TIMESTAMP,
+        days: that.$.days.value,
+        amount: that.$.amount.value,
+        flow: that.$.flow.selected,
         clientkey: that.$.client.selected,
         clientname: that.$.fbClients.getByKey(that.$.client.selected).name, 
         clientgroup: that.$.fbClients.getByKey(that.$.client.selected).group,
-        userkey: that.$.user.selected,
-        username: that.$.fbUsers.getByKey(that.$.user.selected).name, 
-        projectkey: that.$.project.selected,
-        projectname: that.$.fbProjects.getByKey(that.$.project.selected).name
+        verified: that.$.verified.selected
+      },
+      function(){
+        that.fire('goto', {'msg': 'inkomsten'});
       })
     }
   });
