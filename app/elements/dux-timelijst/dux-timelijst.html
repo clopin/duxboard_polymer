@@ -20,7 +20,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <firebase-collection id="fbTimentries" order-by-child="weeknr" location="https://duxboard.firebaseio.com/timeentries" data="{{timeentries}}"></firebase-collection>
     <paper-menu>
       <template is="dom-repeat" items="{{timeentries}}">
-        <dux-time key="{{item.__firebaseKey__}}" weeknr="{{item.weeknr}}" on-detailselect="onselect"></dux-time>
+        <dux-time key="{{item.__firebaseKey__}}" week="{{item.week}}" projectname="{{item.projectname}}" username="{{item.username}}" hours="{{item.hours}}" on-detailselect="onselect"></dux-time>
       </template>
     </paper-menu>
   </template>

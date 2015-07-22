@@ -21,7 +21,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <firebase-collection id="fbUsers" order-by-child="name" location="https://duxboard.firebaseio.com/users" data="{{users}}"></firebase-collection>
     <h2>Voeg tijdsregistratie toe</h2>
     <form>
-      <paper-input id="weeknr" label="Week"></paper-input>
+      <paper-input id="week" label="Week"></paper-input>
       <paper-input id="year" label="Jaar"></paper-input>
       <paper-input id="hours" label="Uren"></paper-input>
       Project: <paper-radio-group id="project">
@@ -54,7 +54,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       this.fbTimeentries= new Firebase("https://duxboard.firebaseio.com/timeentries");
       var that = this;
       this.fbTimeentries.push({
-        week: that.$.weeknr.value,
+        week: that.$.week.value,
         year: that.$.year.value,
         hours: that.$.hours.value,
         timestamp: Firebase.ServerValue.TIMESTAMP,

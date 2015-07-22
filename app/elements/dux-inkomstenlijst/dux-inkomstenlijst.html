@@ -20,7 +20,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <firebase-collection id="fbInkomsten" order-by-child="timestamp" location="https://duxboard.firebaseio.com/orders" data="{{orders}}"></firebase-collection>
     <paper-menu>
       <template is="dom-repeat" items="{{orders}}">
-        <dux-inkomstlijn key="{{item.__firebaseKey__}}" amount="{{item.amount}}" on-detailselect="onselect"></dux-inkomstlijn>
+        <dux-inkomstenlijn key="{{item.__firebaseKey__}}" amount="{{item.amount}}" clientname="{{item.clientname}}" on-detailselect="onselect"></dux-inkomstenlijn>
       </template>
     </paper-menu>
   </template>
