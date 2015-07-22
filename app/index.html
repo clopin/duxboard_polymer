@@ -140,6 +140,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             </section>
 
+            <section data-route="newrequest">
+              <paper-material elevation="1">
+                <dux-aanvraagentry on-goto="goto"></dux-aanvraagentry>
+              </paper-material>
+            </section>
+
             <section data-route="newproject">
               <paper-material elevation="1">
                 <dux-projectentry on-goto="goto"></dux-projectentry>
@@ -184,13 +190,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             <section data-route="uitgaven">
               <paper-material elevation="1">
-                <h2 class="paper-font-display2">Users</h2>
+                <h2 class="paper-font-display2">Uitgaven</h2>
                 <dux-uitgavenlijst></dux-uitgavenlijst>
-                <a href="/newuitgaven"><paper-fab icon="add"></paper-fab></a>
+                <a href="/newuitgave"><paper-fab icon="add"></paper-fab></a>
               </paper-material>
             </section>
 
-            <section data-route="newuitgaven">
+            <section data-route="newuitgave">
               <paper-material elevation="1">
                 <dux-uitgavenentry on-goto="goto"></dux-uitgavenentry>
               </paper-material>
@@ -213,6 +219,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <section data-route="newclient">
               <paper-material elevation="1">
                 <dux-klantenentry on-goto="goto"></dux-klantenentry>
+              </paper-material>
+            </section>
+
+            <section data-route="newrequest">
+              <paper-material elevation="1">
+                <dux-aanvraagentry on-goto="goto"></dux-aanvraagentry>
               </paper-material>
             </section>
 

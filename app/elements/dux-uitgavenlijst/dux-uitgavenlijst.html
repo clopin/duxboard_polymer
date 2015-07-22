@@ -10,20 +10,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
-<dom-module id="dux-inkomstenlijn">
+<dom-module id="dux-uitgavenlijst">
   <style>
     :host {
       display: block;
     }
   </style>
   <template>
-    <paper-item on-click="detailclick"><div><span>{{amount}}</span> van <span>{{clientname}}</span>.</div></paper-item>
+        <firebase-collection id="fbUitgaven" order-by-child="timestamp" location="https://duxboard.firebaseio.com/contracts" data="{{contracts}}"></firebase-collection>
+    <paper-menu>
+      <template is="dom-repeat" items="{{contracts}}">
+        <dux-uitgavenlijn key="{{item.__firebaseKey__}}" days="{{item.days}}" username="{{item.username}}" on-detailselect="onselect"></dux-uitgavenlijn>
+      </template>
+    </paper-menu>
   </template>
 </dom-module>
 <script>
 (function() {
   Polymer({
-    is: 'dux-inkomstenlijn',
+    is: 'dux-uitgavenlijst',
 
     properties: {
       foo: {

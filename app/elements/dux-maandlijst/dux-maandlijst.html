@@ -10,20 +10,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
-<dom-module id="dux-inkomstenlijn">
+<dom-module id="dux-maandlijst">
   <style>
     :host {
       display: block;
     }
   </style>
   <template>
-    <paper-item on-click="detailclick"><div><span>{{amount}}</span> van <span>{{clientname}}</span>.</div></paper-item>
+    <div>Hello from <span>{{foo}}</span></div>
   </template>
 </dom-module>
 <script>
 (function() {
   Polymer({
-    is: 'dux-inkomstenlijn',
+    is: 'dux-maandlijst',
 
     properties: {
       foo: {

@@ -1,0 +1,55 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="dux-aanvraagentry">
+  <style>
+    :host {
+      display: block;
+    }
+  </style>
+  <template>
+    <firebase-collection id="fbUsers" order-by-child="name" location="https://duxboard.firebaseio.com/users" data="{{users}}"></firebase-collection>
+    <h2>Voeg contract toe</h2>
+    <form>
+      <paper-input id="maxdays" label="Max Days"></paper-input>
+      <paper-input id="reference" label="Referentie"></paper-input>
+      <paper-input id="price" label="Prijs"></paper-input>
+    </form>
+    <div class="buttons">
+      <paper-button on-click="cancelRequest">Cancel</paper-button>
+      <paper-button on-click="submitRequest" raised>Voeg toe</paper-button>
+    </div>
+  </template>
+</dom-module>
+<script>
+(function() {
+  Polymer({
+    is: 'dux-aanvraagentry',
+    cancelRequest: function() {
+      this.fire('goto', {'msg': 'uitgaven'});
+    },
+    submitRequest: function() {
+      this.fbRequests= new Firebase("https://duxboard.firebaseio.com/requests");
+      var that = this;
+      this.fbRequests.push({
+        maxdays: that.$.maxdays.value,
+        reference: that.$.reference.value,
+        timestamp: Firebase.ServerValue.TIMESTAMP,
+        price: that.$.price.value
+      },
+      function(){
+        that.fire('goto', {'msg': 'uitgaven'});
+      })
+    }
+  });
+})();
+</script>
