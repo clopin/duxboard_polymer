@@ -20,7 +20,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <firebase-collection id="fbUitgaven" order-by-child="timestamp" location="https://duxboard.firebaseio.com/contracts" data="{{contracts}}"></firebase-collection>
     <paper-menu>
       <template is="dom-repeat" items="{{contracts}}">
-        <dux-uitgavenlijn key="{{item.__firebaseKey__}}" days="{{item.days}}" username="{{item.username}}" on-detailselect="onselect"></dux-uitgavenlijn>
+        <dux-uitgavenlijn key="{{item.__firebaseKey__}}" days="{{item.days}}" username="{{item.username}}" reference="{{item.reference}}" on-detailselect="onselect"></dux-uitgavenlijn>
       </template>
     </paper-menu>
   </template>

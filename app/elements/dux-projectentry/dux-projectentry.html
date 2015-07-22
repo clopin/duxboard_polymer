@@ -47,11 +47,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       this.fbProjects= new Firebase("https://duxboard.firebaseio.com/projects");
       var that = this;
       this.fbProjects.push({
-        name: this.$.name.value,
-        clientkey: this.$.client.selected,
+        name: that.$.name.value,
+        clientkey: that.$.client.selected,
         timestamp: Firebase.ServerValue.TIMESTAMP,
-        clientname: this.$.fbClients.getByKey(this.$.client.selected).name, 
-        clientgroup: this.$.fbClients.getByKey(this.$.client.selected).group,
+        clientname: that.$.fbClients.getByKey(that.$.client.selected).name, 
+        clientgroup: that.$.fbClients.getByKey(that.$.client.selected).group,
       },
       function(){
         that.fire('goto', {'msg': 'projects'});

@@ -17,7 +17,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     }
   </style>
   <template>
-    <paper-item on-click="detailclick"><div><span>{{days}}</span> dagen voor <span>{{username}}</span>.</div></paper-item>
+    <paper-item on-click="detailclick"><div><span>{{reference}}</span>: <span>{{days}}</span> dagen voor <span>{{username}}</span>.</div></paper-item><a href$="{{constructURL(reference)}}"><iron-icon icon="icons:add-circle"></iron-icon></a>
+    <dux-maandlijst></dux-maandlijst>
   </template>
 </dom-module>
 <script>
@@ -31,6 +32,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         value: 'bar',
         notify: true
       }
+    },
+    constructURL: function(reference) {
+      return '/newmonth/' + reference;
+
     }
   });
 })();

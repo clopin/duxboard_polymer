@@ -17,20 +17,45 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     }
   </style>
   <template>
-    <div>Hello from <span>{{foo}}</span></div>
+   <h2>Voeg maandsheet toe voor <span>{{contract}}</span></h2>
+      <form>
+        <paper-input id="month" label="Maand"></paper-input>
+        <paper-input id="year" label="Jaar"></paper-input>
+        <paper-input id="expecteddays" label="Verwacht aantal dagen"></paper-input>
+        <paper-input id="effectivedays" label="Aantal dagen"></paper-input>
+        <paper-input id="ontvangst" label="Ontvangst"></paper-input>
+        <paper-input id="invoice" label="Factuur"></paper-input>
+      </form>
+      <div class="buttons">
+        <paper-button on-click="cancelMonth">Cancel</paper-button>
+        <paper-button on-click="submitMonth" raised>Voeg toe</paper-button>
+      </div>
   </template>
 </dom-module>
 <script>
 (function() {
   Polymer({
     is: 'dux-maandentry',
-
-    properties: {
-      foo: {
-        type: String,
-        value: 'bar',
-        notify: true
-      }
+    cancelMonth: function() {
+      this.fire('goto', {'msg': 'uitgaven'});
+    },
+    submitMonth: function() {
+      var that = this;
+      var contractkey= new Firebase('https://duxboard.firebaseio.com/contracts/').orderByChild('reference').equalTo(app.params.contract).limitToFirst(1).on('child_added', function(snapshot) {
+          this.fbMonths= new Firebase('https://duxboard.firebaseio.com/contracts/' + snapshot.key() + '/months');
+          this.fbMonths.push({
+            month: that.$.month.value,
+            timestamp: Firebase.ServerValue.TIMESTAMP,
+            year: that.$.year.value,
+            expecteddays: that.$.expecteddays.value,
+            effectivedays: that.$.effectivedays.value,
+            ontvangst: that.$.ontvangst.value,
+            invoice: that.$.invoice.value
+          },
+          function(){
+            that.fire('goto', {'msg': 'uitgaven'});
+          });
+        });
     }
   });
 })();

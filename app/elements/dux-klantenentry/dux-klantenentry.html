@@ -39,8 +39,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       this.fbProjects= new Firebase("https://duxboard.firebaseio.com/clients");
       var that = this;
       this.fbProjects.push({
-        name: this.$.name.value,
-        group: this.$.group.value,
+        name: that.$.name.value,
+        group: that.$.group.value,
         timestamp: Firebase.ServerValue.TIMESTAMP
       },
       function(){

@@ -41,10 +41,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       this.fbUsers= new Firebase("https://duxboard.firebaseio.com/users");
       var that = this;
       this.fbUsers.push({
-        name: this.$.name.value,
-        firm: this.$.firm.value,
-        regime: this.$.regime.value,
-        role: this.$.role.value,
+        name: that.$.name.value,
+        firm: that.$.firm.value,
+        regime: that.$.regime.value,
+        role: that.$.role.value,
         timestamp: Firebase.ServerValue.TIMESTAMP
       },
       function(){
