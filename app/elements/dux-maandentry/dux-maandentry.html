@@ -42,7 +42,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     submitMonth: function() {
       var that = this;
       var contractkey= new Firebase('https://duxboard.firebaseio.com/contracts/').orderByChild('reference').equalTo(app.params.contract).limitToFirst(1).on('child_added', function(snapshot) {
-          this.fbMonths= new Firebase('https://duxboard.firebaseio.com/contracts/' + snapshot.key() + '/months');
+          this.fbMonths= new Firebase('https://duxboard.firebaseio.com/months');
           this.fbMonths.push({
             month: that.$.month.value,
             timestamp: Firebase.ServerValue.TIMESTAMP,
@@ -50,7 +50,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             expecteddays: that.$.expecteddays.value,
             effectivedays: that.$.effectivedays.value,
             ontvangst: that.$.ontvangst.value,
-            invoice: that.$.invoice.value
+            invoice: that.$.invoice.value,
+            contractkey: snapshot.key()
           },
           function(){
             that.fire('goto', {'msg': 'uitgaven'});

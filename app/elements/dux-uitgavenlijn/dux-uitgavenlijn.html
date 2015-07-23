@@ -18,7 +18,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   </style>
   <template>
     <paper-item on-click="detailclick"><div><span>{{reference}}</span>: <span>{{days}}</span> dagen voor <span>{{username}}</span>.</div></paper-item><a href$="{{constructURL(reference)}}"><iron-icon icon="icons:add-circle"></iron-icon></a>
-    <dux-maandlijst reference = "{{reference}}"></dux-maandlijst>
+    <dux-maandlijst reference="{{fetchKey(reference)}}"></dux-maandlijst>
   </template>
 </dom-module>
 <script>
@@ -32,6 +32,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         value: 'bar',
         notify: true
       }
+    },    
+    fetchKey: function(e) {
+      console.log('reference: ' + e);
+      var contractKey;
+      var fbURL = new Firebase('https://duxboard.firebaseio.com/contracts').orderByChild('reference').equalTo(e).limitToFirst(1).once('child_added', function(snapshot) {
+          console.log('key: ' + snapshot.key());
+          contractKey = snapshot.key();
+        })
+      console.log(contractKey);
+      return contractKey;
     },
     constructURL: function(reference) {
       return '/newmonth/' + reference;
