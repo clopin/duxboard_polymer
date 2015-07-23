@@ -14,7 +14,7 @@
     }  
   </style>
   <template>
-  	<firebase-collection id="fbProjects" order-by-child="name" location="https://duxboard.firebaseio.com/projects" data="{{projects}}"></firebase-collection>
+  	<firebase-collection id="fbProjectsList" order-by-child="name" location="https://duxboard.firebaseio.com/projects" data="{{projects}}"></firebase-collection>
   	<paper-menu>
     	<template is="dom-repeat" items="{{projects}}">
     		<dux-project key="{{item.__firebaseKey__}}" name="{{item.name}}" on-detailselect="onselect"></dux-project>
