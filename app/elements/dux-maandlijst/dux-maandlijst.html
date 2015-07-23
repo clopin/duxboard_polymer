@@ -17,12 +17,30 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     }
   </style>
   <template>
+    <firebase-collection id="fbMonths" order-by-child="timestamp" location="https://duxboard.firebaseio.com/contracts/-JuomF0AOFXL_-gbEDQ8/months" data="{{months}}"></firebase-collection>
+      <paper-menu>
+        <span>testje uit</span>
+        <template is="dom-repeat" items="{{months}}">
+        <span>testje in</span>
+          <dux-maandlijn key="{{item.__firebaseKey__}}" days="{{item.effectivedays}}" month="{{item.month}}" year="{{item.year}}" on-detailselect="onselect"></dux-maandlijn>
+        </template>
+      </paper-menu>
   </template>
 </dom-module>
 <script>
 (function() {
   Polymer({
     is: 'dux-maandlijst',
+    fetchURL: function(e) {
+      console.log('reference: ' + e);
+      var contractKey;
+      var fbURL = new Firebase('https://duxboard.firebaseio.com/contracts').orderByChild('reference').equalTo(e).limitToFirst(1).once('child_added', function(snapshot) {
+          console.log('key: ' + snapshot.key());
+          contractKey = 'https://duxboard.firebaseio.com/contracts/' + snapshot.key() + '/months';
+        })
+      console.log(contractKey);
+      return contractKey;
+    },
 
     properties: {
       foo: {
