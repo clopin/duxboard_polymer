@@ -15,9 +15,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     :host {
       display: block;
     }
+    paper-item {
+      width: 100%;
+    }
+    h2 {
+      float: left;
+    }
+    iron-icon {
+      float: right;
+    }
   </style>
   <template>
-    <paper-item on-click="detailclick"><div><span>{{reference}}</span>: <span>{{days}}</span> dagen voor <span>{{username}}</span>.</div></paper-item><a href$="{{constructURL(reference)}}"><iron-icon icon="icons:add-circle"></iron-icon></a>
+    <paper-item on-click="detailclick"><div><h2><span>{{reference}}</span>: <span>{{days}}</span> dagen voor <span>{{username}}</span></h2></div><a href$="{{constructURL(reference)}}"><iron-icon icon="icons:add-circle"></iron-icon></a></paper-item>
     <dux-maandlijst reference="{{fetchKey(reference)}}"></dux-maandlijst>
   </template>
 </dom-module>
