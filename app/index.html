@@ -122,11 +122,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <!-- Main Content -->
         <div class="content">
           <iron-pages attr-for-selected="data-route" selected="{{route}}">
-
             <section data-route="home">
               <paper-material elevation="1">
+                <h2 class="paper-font-display2">Stats</h2>
+                <paper-material elevation="2">
+                  <h3 class="paper-font-display2">Inkomsten</h3>
+                  <dux-statsin></dux-statsin>
+                </paper-material>
 
-                <h2 class="paper-font-display2">Zie menu hiernaast</h2>
+                <paper-material elevation="2">
+                  <h3 class="paper-font-display2">Uitgaven</h3>
+                  <dux-statsout></dux-statsout>
+                </paper-material>
               </paper-material>
 
             </section>

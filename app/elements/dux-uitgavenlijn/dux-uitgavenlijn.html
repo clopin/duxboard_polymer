@@ -18,16 +18,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     paper-item {
       width: 100%;
     }
-    h2 {
+    .expense-titel {
       float: left;
+      width: auto;
     }
     iron-icon {
       float: right;
-      width: 20%;
+      width: 10%;
     }
   </style>
   <template>
-    <paper-item on-click="detailclick"><div><h2><span>{{reference}}</span>: <span>{{days}}</span> dagen voor <span>{{username}}</span></h2></div><a href$="{{constructURL(reference)}}"><iron-icon icon="icons:add-circle"></iron-icon></a></paper-item>
+    <paper-item on-click="detailclick"><div class="expense-titel"><h2><span>{{reference}}</span>: <span>{{days}}</span> dagen voor <span>{{username}}</span></h2></div><a href$="{{constructURL(reference)}}"><iron-icon icon="icons:add-circle"></iron-icon></a></paper-item>
     <dux-maandlijst reference="{{fetchKey(reference)}}"></dux-maandlijst>
   </template>
 </dom-module>
@@ -44,13 +45,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
     },    
     fetchKey: function(e) {
-      console.log('reference: ' + e);
+      // console.log('reference: ' + e);
       var contractKey;
-      var fbURL = new Firebase('https://duxboard.firebaseio.com/contracts').orderByChild('reference').equalTo(e).limitToFirst(1).once('child_added', function(snapshot) {
-          console.log('key: ' + snapshot.key());
+      var fbURL = new Firebase('https://duxboard.firebaseio.com/contracts').orderByChild('reference').equalTo(e).limitToFirst(1).once('value', function(snapshot) {
+          // console.log('key: ' + snapshot.key());
           contractKey = snapshot.key();
         })
-      console.log(contractKey);
+      // console.log(contractKey);
       return contractKey;
     },
     constructURL: function(reference) {
